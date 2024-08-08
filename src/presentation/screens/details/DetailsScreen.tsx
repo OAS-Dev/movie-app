@@ -8,6 +8,7 @@ import {FullMovie} from '../../../core/entities/movie.entity';
 import {MovieDetails} from '../../components/movie/MovieDetails';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Cast} from '../../../core/entities/cast.entity';
+import {FullScreenLoader} from '../../components/loaders/FullScreenLoader';
 
 interface DetailsScreenProps
   extends StackScreenProps<RootStackParams, 'Details'> {
@@ -20,7 +21,7 @@ export const DetailsScreen = ({route}: DetailsScreenProps) => {
   const {isLoading, fullMovie, cast} = useMovie(movieId);
 
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return <FullScreenLoader />;
   }
 
   return (
@@ -33,7 +34,7 @@ export const DetailsScreen = ({route}: DetailsScreenProps) => {
       />
 
       {/* Details */}
-      <MovieDetails movie={fullMovie as FullMovie} cast={cast as Cast} />
+      <MovieDetails movie={fullMovie as FullMovie} cast={cast as Cast[]} />
     </ScrollView>
   );
 };
